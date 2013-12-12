@@ -1,0 +1,11 @@
+name: myblog
+description: A sample Polymer application
+dependencies:
+    angular: any      
+    browser: any
+    js: any
+    unittest: any
+    polymer: any
+transformers:
+- polymer:
+    entry_points: web/myblog.html
