@@ -53,57 +53,5 @@ snapclass(List args) {
     
  }
 
-  void oldFunc(){
-    Snap.callMethod('load',['christmas-tree.svg', (e){
-      var tree = e.callMethod('select',['#svg3025']);
-      var star = e.callMethod('select',['#starsvg']);
-      var ballball1 = e.callMethod('select',['#path3063']);
-  //    Snap.callMethod('load',['star.svg',(f){
-  //      var sg = f.callMethod('select',['#svg2']);
-        image = paper.callMethod('image',['https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c210.0.540.540/s200x200/1468585_10151831930897423_1727857692_n.jpg',232,0,220,220]);
-  //      image.callMethod('drag',[]);
-        var scoped = new JsObject.jsify({
-  //        'cx':100,
-  //        'cy':100,
-  //        'mask':image,
-          'fill': "r()#fef",
-  //          'opacity': 0.9
-        });
-        
-  
-        var yy = [1100,100];
-        var ppp = new JsObject.jsify({
-          'mask':star,
-          'fill':'none',
-  //        'transform':'t{$yy}'
-        });
-        
-        image2 = paper.callMethod('image',['https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c210.0.540.540/s200x200/1468585_10151831930897423_1727857692_n.jpg',0,0,110,110]);
-        var imageattr = new JsObject.jsify({
-          'x':0,
-          'y':0,
-          'width':175,
-          'height':140  
-        });
-        var imagepattern = image2.callMethod('pattern',[imageattr]); 
-        var defimage = imagepattern.callMethod('toDefs');      
-        var ppp2 = new JsObject.jsify({
-  //        'mask':ballball1,
-  //        'fill':'url(https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/c210.0.540.540/s50x50/1468585_10151831930897423_1727857692_n.jpg)',
-  //        'fill': "r()#fef"
-            'fill': defimage
-  //        'transform':'t{$yy}'
-        });
-        image.callMethod('attr',[ppp]);
-        var rep = ballball1.callMethod('attr',[ppp2]);
-        star.callMethod('attr',[scoped]);
-  
-      paper.callMethod('prepend',[tree]);
-    }]);
-  
-    
-    
-      
-  }
-
+ 
 }
