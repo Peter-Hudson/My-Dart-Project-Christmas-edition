@@ -30,9 +30,9 @@
      inkscape:document-units="px"
      inkscape:current-layer="g3037"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -141,9 +141,12 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="m 379.99999,-13.352102 -64.82951,65.848353 17.49148,90.735439 -82.65893,-41.30827 -80.88937,44.67417 13.74349,-91.378267 -67.48385,-63.125281 91.15287,-15.166606 39.18205,-83.687736 42.59208,82.004785 z"
-       inkscape:transform-center-x="0.65638848"
-       inkscape:transform-center-y="-9.0886519"
-       transform="matrix(0.74187208,0,0,0.73039112,170.79199,76.798814)" />
+       inkscape:transform-center-x="0.49959429"
+       inkscape:transform-center-y="-7.3388285"
+       transform="matrix(0.56465552,0,0,0.58977015,213.15853,63.493026)" />
+	   <clipPath id="starsvgc">
+		<polygon points="350,75  379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161" />
+	   </clipPath>
     <g
        id="ballball1">
       <g
@@ -166,6 +169,9 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
+	<clipPath id="path3011c">
+		<use xlink:href="#path3011"/>
+	   </clipPath>
     <g
        id="ballball2"
        transform="translate(213.14219,1.0101525)">
@@ -174,7 +180,7 @@
          id="g3045">
         <path
            transform="translate(16.65265,13.825242)"
-           d="m 280,333.79074 a 52.857143,52.857143 0 1 1 -105.71429,0 52.857143,52.857143 0 1 1 105.71429,0 z"
+           d="m 280,333.79074 c 0,29.1922 -23.66495,52.85714 -52.85715,52.85714 -29.19219,0 -52.85714,-23.66494 -52.85714,-52.85714 0,-29.19219 23.66495,-52.85714 52.85714,-52.85714 29.1922,0 52.85715,23.66495 52.85715,52.85714 z"
            sodipodi:ry="52.857143"
            sodipodi:rx="52.857143"
            sodipodi:cy="333.79074"
@@ -189,6 +195,9 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
+		<clipPath id="path3047c">
+		<use xlink:href="#path3047"/>
+	   </clipPath>
     <g
        transform="translate(-85.862963,185.86807)"
        id="ballball4">
@@ -203,7 +212,7 @@
            sodipodi:cy="333.79074"
            sodipodi:rx="52.857143"
            sodipodi:ry="52.857143"
-           d="m 280,333.79074 a 52.857143,52.857143 0 1 1 -105.71429,0 52.857143,52.857143 0 1 1 105.71429,0 z"
+           d="m 280,333.79074 c 0,29.1922 -23.66495,52.85714 -52.85715,52.85714 -29.19219,0 -52.85714,-23.66494 -52.85714,-52.85714 0,-29.19219 23.66495,-52.85714 52.85714,-52.85714 29.1922,0 52.85715,23.66495 52.85715,52.85714 z"
            transform="translate(16.65265,13.825242)" />
         <path
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -212,6 +221,9 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
+	<clipPath id="path3055c">
+		<use xlink:href="#path3055"/>
+	   </clipPath>
     <g
        id="ballball6"
        transform="translate(301.02546,186.87822)">
@@ -220,7 +232,7 @@
          id="g3061">
         <path
            transform="translate(16.65265,13.825242)"
-           d="m 280,333.79074 a 52.857143,52.857143 0 1 1 -105.71429,0 52.857143,52.857143 0 1 1 105.71429,0 z"
+           d="m 280,333.79074 c 0,29.1922 -23.66495,52.85714 -52.85715,52.85714 -29.19219,0 -52.85714,-23.66494 -52.85714,-52.85714 0,-29.19219 23.66495,-52.85714 52.85714,-52.85714 29.1922,0 52.85715,23.66495 52.85715,52.85714 z"
            sodipodi:ry="52.857143"
            sodipodi:rx="52.857143"
            sodipodi:cy="333.79074"
@@ -235,6 +247,9 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
+	<clipPath id="path3063c">
+		<use xlink:href="#path3063"/>
+	   </clipPath>
     <g
        id="ballball5"
        transform="translate(107.07617,238.396)">
@@ -243,7 +258,7 @@
          id="g3069">
         <path
            transform="translate(16.65265,13.825242)"
-           d="m 280,333.79074 a 52.857143,52.857143 0 1 1 -105.71429,0 52.857143,52.857143 0 1 1 105.71429,0 z"
+           d="m 280,333.79074 c 0,29.1922 -23.66495,52.85714 -52.85715,52.85714 -29.19219,0 -52.85714,-23.66494 -52.85714,-52.85714 0,-29.19219 23.66495,-52.85714 52.85714,-52.85714 29.1922,0 52.85715,23.66495 52.85715,52.85714 z"
            sodipodi:ry="52.857143"
            sodipodi:rx="52.857143"
            sodipodi:cy="333.79074"
@@ -258,6 +273,9 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
+	<clipPath id="path3071c">
+		<use xlink:href="#path3071"/>
+	   </clipPath>
     <g
        transform="translate(109.09648,86.873119)"
        id="ballball3">
@@ -272,7 +290,7 @@
            sodipodi:cy="333.79074"
            sodipodi:rx="52.857143"
            sodipodi:ry="52.857143"
-           d="m 280,333.79074 a 52.857143,52.857143 0 1 1 -105.71429,0 52.857143,52.857143 0 1 1 105.71429,0 z"
+           d="m 280,333.79074 c 0,29.1922 -23.66495,52.85714 -52.85715,52.85714 -29.19219,0 -52.85714,-23.66494 -52.85714,-52.85714 0,-29.19219 23.66495,-52.85714 52.85714,-52.85714 29.1922,0 52.85715,23.66495 52.85715,52.85714 z"
            transform="translate(16.65265,13.825242)" />
         <path
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -281,5 +299,8 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
+		<clipPath id="path3079c">
+		<use xlink:href="#path3079"/>
+	   </clipPath>
   </g>
 </svg>
