@@ -65,9 +65,9 @@
      inkscape:document-units="px"
      inkscape:current-layer="g3037"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -78,7 +78,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -359,16 +359,5 @@
          href="#path3079"
          id="use3041" />
     </clipPath>
-    <image
-       y="35.219296"
-       x="325.71429"
-       id="image3861"
-       xlink:href="file:///C:/Users/Peter/My-Dart-Project/web/test.jpg"
-       height="314.28574"
-       width="340"
-       clip-path="url(#clipPath3876)"
-       transform="matrix(0.58823529,0,0,0.6506768,59.831785,-28.509365)"
-       inkscape:transform-center-x="-45.378149"
-       inkscape:transform-center-y="-119.91044" />
   </g>
 </svg>

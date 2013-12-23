@@ -12,9 +12,9 @@ import 'stageclass.dart';
 
 void main(){
   
-  List images = [];  
+  List images = ['https://graph.facebook.com/peterhhudson/picture?width=200&height=200','https://graph.facebook.com/peterhhudson/picture?width=200&height=200'];  
   
-  var st = new Stageclass();
+  var st = new Stageclass('https://graph.facebook.com/peterhhudson/picture?width=200&height=200',images);
   
   var module = new Module()
   ..type(MymvcController)

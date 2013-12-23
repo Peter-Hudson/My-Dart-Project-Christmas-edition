@@ -4,25 +4,84 @@ import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 import 'dart:math' as math;
 
+List friends;
+List renderedFriends;
 Stage stage;
 ResourceManager resourceManager;
 var flowerField;
+RenderLoop renderLoop;
+var star;
+String myimage;
+List ballballs = [
+                  {'height':100,'width':100,'circum':100,'x':194,'y':298},
+                  {'height':100,'width':100,'circum':100,'x':408,'y':298},
+                  {'height':100,'width':100,'circum':100,'x':303,'y':385},
+                  {'height':100,'width':100,'circum':100,'x':108,'y':484},
+                  {'height':100,'width':100,'circum':100,'x':301,'y':536},
+                  {'height':100,'width':100,'circum':100,'x':495,'y':484}
+                  ];
+
+List color_list = [Color.CornflowerBlue,Color.AliceBlue,Color.BlueViolet,Color.Crimson,Color.Firebrick,Color.ForestGreen];
 
 class Stageclass{
-  
+      
+  Stageclass(String myimage, List friends){
+    stage = new Stage("myStage", html.querySelector('#stage'));
+    renderLoop = new RenderLoop();
+    renderLoop.addStage(stage);
     
-  Stageclass(){
-    stage = new Stage("myStage", html.querySelector('#stage'));  
     buildStar();
     
     resourceManager = new ResourceManager()
-    ..addBitmapData('me', 'test.jpg')
-    ..load().then((_) {
-      flowerField = new FlowerField();
-      flowerField.x = 470;
-      flowerField.y = 250;
-      stage.addChild(flowerField);
-    });
+    ..addBitmapData('tree', 'christmas-tree.svg')
+    ..addBitmapData('me', myimage)     
+      ..load().then((_) {      
+        var christmastree = new Bitmap(resourceManager.getBitmapData('tree'));
+        christmastree.x = 0;
+        christmastree.y = 0;
+        stage.addChild(christmastree);
+        
+        var fbprofile = new Bitmap(resourceManager.getBitmapData('me'));
+        fbprofile.x = 250;
+        fbprofile.y = 0;
+        fbprofile.mask = star;
+        stage.addChild(fbprofile);
+      });
+    
+    var circleMask = new Mask.circle(100, 100, 100);
+    for(var cf=0; cf<friends.length;cf++){
+      var temp_friend = friends[cf];
+      resourceManager
+      ..addBitmapData('friend${cf}', temp_friend)
+      ..load().then((_) {       
+       
+              
+          var f1 = new Bitmap(resourceManager.getBitmapData('friend${cf}'));
+          f1.width = ballballs[cf]['width'];
+          f1.height = ballballs[cf]['height'];
+          f1.x = ballballs[cf]['x'];
+          f1.y = ballballs[cf]['y'];
+          f1.mask = circleMask;
+          
+          stage.addChild(f1);
+          var ff = new GlowFilter(color_list[cf],0.6);
+          var shape = new Shape();
+          shape.graphics.circle(ballballs[cf]['x']+50, ballballs[cf]['y']+50, 50);
+          
+          
+          
+//          shape.graphics.fillStyle(color_list[cf]);
+          
+          
+          
+          stage.addChild(shape);
+          
+//          renderedFriends.add(f1);
+        
+        });
+    }
+    
+    
   }
   
   buildStar(){
@@ -31,12 +90,12 @@ class Stageclass{
     for(int i = 0; i < 6; i++) {
       num a1 = (i * 60) * math.PI / 180;
       num a2 = (i * 60 + 30) * math.PI / 180;
-      starPath.add(new Point(470 + 200 * math.cos(a1), 250 + 200 * math.sin(a1)));
-      starPath.add(new Point(470 + 100 * math.cos(a2), 250 + 100 * math.sin(a2)));
+      starPath.add(new Point(102 + 100 * math.cos(a1), 90+100 * math.sin(a1)));
+      starPath.add(new Point(102 + 52 * math.cos(a2), 90+52 * math.sin(a2)));
     }
-    var customMask = new Sprite();
-    customMask.mask = new Mask.custom(starPath);
     
+      star = new Mask.custom(starPath);
+//    stage.addChild(customMask);
   }
   
 }
