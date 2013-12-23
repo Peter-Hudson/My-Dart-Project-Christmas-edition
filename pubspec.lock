@@ -8,7 +8,7 @@ packages:
   angular:
     description: angular
     source: hosted
-    version: "0.9.2"
+    version: "0.9.3"
   args:
     description: args
     source: hosted
@@ -21,14 +21,22 @@ packages:
     description: browser
     source: hosted
     version: "0.9.0"
+  collection:
+    description: collection
+    source: hosted
+    version: "0.9.0"
+  collection_helpers:
+    description: collection_helpers
+    source: hosted
+    version: "0.9.2"
   csslib:
     description: csslib
     source: hosted
-    version: "0.9.0"
+    version: "0.9.1"
   custom_element:
     description: custom_element
     source: hosted
-    version: "0.9.0"
+    version: "0.9.1+2"
   di:
     description: di
     source: hosted
@@ -48,11 +56,11 @@ packages:
   js:
     description: js
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   logging:
     description: logging
     source: hosted
-    version: "0.9.0"
+    version: "0.9.1"
   mutation_observer:
     description: mutation_observer
     source: hosted
@@ -60,7 +68,7 @@ packages:
   observe:
     description: observe
     source: hosted
-    version: "0.9.2"
+    version: "0.9.3"
   path:
     description: path
     source: hosted
@@ -72,7 +80,7 @@ packages:
   polymer:
     description: polymer
     source: hosted
-    version: "0.9.2"
+    version: "0.9.3+2"
   polymer_expressions:
     description: polymer_expressions
     source: hosted
@@ -93,18 +101,26 @@ packages:
     description: stack_trace
     source: hosted
     version: "0.9.0"
+  stagexl:
+    description: stagexl
+    source: hosted
+    version: "0.8.8"
   template_binding:
     description: template_binding
+    source: hosted
+    version: "0.9.1"
+  typed_data:
+    description: typed_data
     source: hosted
     version: "0.9.0"
   unittest:
     description: unittest
     source: hosted
-    version: "0.9.0"
+    version: "0.9.2+1"
   unmodifiable_collection:
     description: unmodifiable_collection
     source: hosted
-    version: "0.9.0"
+    version: "0.9.2"
   utf:
     description: utf
     source: hosted

@@ -19,4 +19,20 @@ h1, p {
   background-color: #fff;
 }
 
-#svg{ height:800px; width:680px; }
+.ng-hide {
+  display: none;
+}
+
+[ng-cloak] {
+  display: none;
+}
+
+.loading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+

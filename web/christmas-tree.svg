@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
@@ -16,7 +17,41 @@
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="christmas-tree.svg">
   <defs
-     id="defs3027" />
+     id="defs3027">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3841">
+      <image
+         y="-55.206955"
+         x="34.886078"
+         id="image3843"
+         xlink:href="file:///C:/Users/Peter/My-Dart-Project/web/test.jpg"
+         height="339.11517"
+         width="354.19824" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3876">
+      <path
+         sodipodi:type="star"
+         style="fill:#000000;fill-opacity:0.04232806;stroke:#000000;stroke-opacity:1"
+         id="path3878"
+         sodipodi:sides="5"
+         sodipodi:cx="162.85715"
+         sodipodi:cy="160.93361"
+         sodipodi:r1="187.4425"
+         sodipodi:r2="93.721245"
+         sodipodi:arg1="0.9151007"
+         sodipodi:arg2="1.5434192"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M 277.14286,309.50503 165.42265,254.61973 56.873552,315.53688 74.54913,192.32415 -16.930029,107.91226 105.71429,86.647904 157.72616,-26.438656 215.84894,83.63198 339.4732,98.152533 252.75073,187.44428 z"
+         inkscape:transform-center-x="1.5855632"
+         inkscape:transform-center-y="-16.384499"
+         transform="translate(340,68.571426)" />
+    </clipPath>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,13 +61,13 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="-99.285714"
-     inkscape:cy="562.93539"
+     inkscape:cy="890.18054"
      inkscape:document-units="px"
      inkscape:current-layer="g3037"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1138"
-     inkscape:window-x="1912"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -43,7 +78,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -143,10 +178,14 @@
        d="m 379.99999,-13.352102 -64.82951,65.848353 17.49148,90.735439 -82.65893,-41.30827 -80.88937,44.67417 13.74349,-91.378267 -67.48385,-63.125281 91.15287,-15.166606 39.18205,-83.687736 42.59208,82.004785 z"
        inkscape:transform-center-x="0.49959429"
        inkscape:transform-center-y="-7.3388285"
-       transform="matrix(0.56465552,0,0,0.58977015,213.15853,63.493026)" />
-	   <clipPath id="starsvgc">
-		<polygon points="350,75  379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161" />
-	   </clipPath>
+       transform="matrix(0.56465552,0,0,0.58977015,213.15853,63.493026)"
+       clip-path="url(#clipPath3841)" />
+    <clipPath
+       id="starsvgc">
+      <use
+         href="#starsvg"
+         id="use2999" />
+    </clipPath>
     <g
        id="ballball1">
       <g
@@ -169,9 +208,12 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
-	<clipPath id="path3011c">
-		<use xlink:href="#path3011"/>
-	   </clipPath>
+    <clipPath
+       id="path3011c">
+      <use
+         href="#path3011"
+         id="use3006" />
+    </clipPath>
     <g
        id="ballball2"
        transform="translate(213.14219,1.0101525)">
@@ -195,9 +237,12 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
-		<clipPath id="path3047c">
-		<use xlink:href="#path3047"/>
-	   </clipPath>
+    <clipPath
+       id="path3047c">
+      <use
+         href="#path3047"
+         id="use3013" />
+    </clipPath>
     <g
        transform="translate(-85.862963,185.86807)"
        id="ballball4">
@@ -221,9 +266,12 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
-	<clipPath id="path3055c">
-		<use xlink:href="#path3055"/>
-	   </clipPath>
+    <clipPath
+       id="path3055c">
+      <use
+         href="#path3055"
+         id="use3020" />
+    </clipPath>
     <g
        id="ballball6"
        transform="translate(301.02546,186.87822)">
@@ -247,9 +295,12 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
-	<clipPath id="path3063c">
-		<use xlink:href="#path3063"/>
-	   </clipPath>
+    <clipPath
+       id="path3063c">
+      <use
+         href="#path3063"
+         id="use3027" />
+    </clipPath>
     <g
        id="ballball5"
        transform="translate(107.07617,238.396)">
@@ -273,9 +324,12 @@
            style="fill:none;stroke:#000000;stroke-width:1.21818662px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       </g>
     </g>
-	<clipPath id="path3071c">
-		<use xlink:href="#path3071"/>
-	   </clipPath>
+    <clipPath
+       id="path3071c">
+      <use
+         href="#path3071"
+         id="use3034" />
+    </clipPath>
     <g
        transform="translate(109.09648,86.873119)"
        id="ballball3">
@@ -299,8 +353,22 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
-		<clipPath id="path3079c">
-		<use xlink:href="#path3079"/>
-	   </clipPath>
+    <clipPath
+       id="path3079c">
+      <use
+         href="#path3079"
+         id="use3041" />
+    </clipPath>
+    <image
+       y="35.219296"
+       x="325.71429"
+       id="image3861"
+       xlink:href="file:///C:/Users/Peter/My-Dart-Project/web/test.jpg"
+       height="314.28574"
+       width="340"
+       clip-path="url(#clipPath3876)"
+       transform="matrix(0.58823529,0,0,0.6506768,59.831785,-28.509365)"
+       inkscape:transform-center-x="-45.378149"
+       inkscape:transform-center-y="-119.91044" />
   </g>
 </svg>

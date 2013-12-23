@@ -45,7 +45,7 @@ class Scope implements Map {
   final NgZone _zone;
   final num _ttl;
   final Map<String, Object> _properties = {};
-  final List<_Watch> _watchers = [];
+  final _WatchList _watchers = new _WatchList();
   final Map<String, List<Function>> _listeners = {};
   final bool _isolate;
   final bool _lazy;
@@ -62,8 +62,8 @@ class Scope implements Map {
   bool _skipAutoDigest = false;
   bool _disabled = false;
 
-  Scope(ExceptionHandler this._exceptionHandler, Parser this._parser,
-      ScopeDigestTTL ttl, NgZone this._zone, Profiler this._perf):
+  Scope(this._exceptionHandler, this._parser, ScopeDigestTTL ttl,
+      this._zone, this._perf):
         $parent = null, _isolate = false, _lazy = false, _ttl = ttl.ttl {
     _properties[r'this']= this;
     $root = this;
@@ -155,9 +155,8 @@ class Scope implements Map {
    *   This is usefull if we expect that the bindings in the scope are constant and there is no need
    *   to check them on each digest. The digest can be forced by marking it [$dirty].
    */
-  $new({bool isolate: false, bool lazy: false}) {
-    return new Scope._child(this, isolate, lazy, _perf);
-  }
+  $new({bool isolate: false, bool lazy: false}) =>
+    new Scope._child(this, isolate, lazy, _perf);
 
   /**
    * *EXPERIMENTAL:* This feature is experimental. We reserve the right to change or delete it.
@@ -209,11 +208,7 @@ class Scope implements Map {
     }
     var watcher = new _Watch(_compileToFn(listener), _initWatchVal,
         _compileToFn(watchExpression), watchStr);
-
-    // we use unshift since we use a while loop in $digest for speed.
-    // the while loop reads in reverse order.
-    _watchers.insert(0, watcher);
-
+    _watchers.addLast(watcher);
     return () => _watchers.remove(watcher);
   }
 
@@ -271,18 +266,42 @@ class Scope implements Map {
   $watchCollection(obj, listener, [String expression, bool shallow=false]) {
     var oldValue;
     var newValue;
-    num changeDetected = 0;
+    int changeDetected = 0;
     Function objGetter = _compileToFn(obj);
     List internalArray = [];
     Map internalMap = {};
-    num oldLength = 0;
+    int oldLength = 0;
+    int newLength;
+    var key;
+    List keysToRemove = [];
+    Function detectNewKeys = (key, value) {
+      newLength++;
+      if (oldValue.containsKey(key)) {
+        if (!_identical(oldValue[key], value)) {
+          changeDetected++;
+          oldValue[key] = value;
+        }
+      } else {
+        oldLength++;
+        oldValue[key] = value;
+        changeDetected++;
+      }
+    };
+    Function findMissingKeys = (key, _) {
+      if (!newValue.containsKey(key)) {
+        oldLength--;
+        keysToRemove.add(key);
+      }
+    };
+
+    Function removeMissingKeys = (k) => oldValue.remove(k);
 
     var $watchCollectionWatch;
 
     if (shallow) {
       $watchCollectionWatch = (_) {
         newValue = objGetter(this);
-        var newLength = newValue == null ? 0 : newValue.length;
+        newLength = newValue == null ? 0 : newValue.length;
         if (newLength != oldLength) {
           oldLength = newLength;
           changeDetected++;
@@ -296,14 +315,13 @@ class Scope implements Map {
     } else {
       $watchCollectionWatch = (_) {
         newValue = objGetter(this);
-        var newLength, key;
 
         if (newValue is! Map && newValue is! List) {
           if (!_identical(oldValue, newValue)) {
             oldValue = newValue;
             changeDetected++;
           }
-        } else if (newValue is List) {
+        } else if (newValue is Iterable) {
           if (!_identical(oldValue, internalArray)) {
             // we are transitioning from something which was not an array into array.
             oldValue = internalArray;
@@ -320,9 +338,9 @@ class Scope implements Map {
           }
           // copy the items to oldValue and look for changes.
           for (var i = 0; i < newLength; i++) {
-            if (!_identical(oldValue[i], newValue[i])) {
+            if (!_identical(oldValue[i], newValue.elementAt(i))) {
               changeDetected++;
-              oldValue[i] = newValue[i];
+              oldValue[i] = newValue.elementAt(i);
             }
           }
         } else { // Map
@@ -334,33 +352,13 @@ class Scope implements Map {
           }
           // copy the items to oldValue and look for changes.
           newLength = 0;
-          newValue.forEach((key, value) {
-            newLength++;
-            if (oldValue.containsKey(key)) {
-              if (!_identical(oldValue[key], value)) {
-                changeDetected++;
-                oldValue[key] = value;
-              }
-            } else {
-              oldLength++;
-              oldValue[key] = value;
-              changeDetected++;
-            }
-
-          });
+          newValue.forEach(detectNewKeys);
           if (oldLength > newLength) {
             // we used to have more keys, need to find them and destroy them.
             changeDetected++;
-            var keysToRemove = [];
-            oldValue.forEach((key, _) {
-              if (!newValue.containsKey(key)) {
-                oldLength--;
-                keysToRemove.add(key);
-              }
-            });
-            keysToRemove.forEach((k) {
-              oldValue.remove(k);
-            });
+            oldValue.forEach(findMissingKeys);
+            keysToRemove.forEach(removeMissingKeys);
+            keysToRemove.clear();
           }
         }
         return changeDetected;
@@ -402,12 +400,10 @@ class Scope implements Map {
 
   $digest() {
     var innerAsyncQueue = _innerAsyncQueue;
-    int length;
     _Watch lastDirtyWatch = null;
     _Watch lastLoopLastDirtyWatch;
     int _ttlLeft = _ttl;
     List<List<String>> watchLog = [];
-    List<_Watch> watchers;
     _Watch watch;
     Scope next, current, target = this;
 
@@ -437,34 +433,39 @@ class Scope implements Map {
 
         watcherCount = 0;
         scopeCount = 0;
+        var firedExpressions;
+        if (_ttl - _ttlLeft > 2) {
+          firedExpressions = <String>[];
+          watchLog.add(firedExpressions);
+        }
         assert((timerId = _perf.startTimer('ng.dirty_check', _ttl-_ttlLeft)) != false);
         digestLoop:
         do { // "traverse the scopes" loop
           scopeCount++;
-          if ((watchers = current._watchers) != null) {
-            // process our watches
-            length = watchers.length;
-            watcherCount += length;
-            while (length-- > 0) {
-              try {
-                watch = watchers[length];
-                if (identical(lastLoopLastDirtyWatch, watch)) {
-                  break digestLoop;
-                }
-                var value = watch.get(current);
-                var last = watch.last;
-                if (!_identical(value, last)) {
-                  lastDirtyWatch = watch;
-                  lastLoopLastDirtyWatch = null;
-                  watch.last = value;
-                  var fireTimer;
-                  assert((fireTimer = _perf.startTimer('ng.fire', watch.exp)) != false);
-                  watch.fn(value, ((last == _initWatchVal) ? value : last), current);
-                  assert(_perf.stopTimer(fireTimer) != false);
-                }
-              } catch (e, s) {
-                _exceptionHandler(e, s);
+          // process our watches
+          _WatchList watchers = current._watchers;
+          watcherCount += watchers.length;
+          for (_Watch watch = watchers.head; watch != null; watch = watch.next) {
+            try {
+              if (identical(lastLoopLastDirtyWatch, watch)) {
+                break digestLoop;
               }
+              var value = watch.get(current);
+              var last = watch.last;
+              if (!_identical(value, last)) {
+                if (_ttlLeft < 3) {
+                  firedExpressions.add(watch.exp == null ? '[unknown]' : watch.exp);
+                }
+                lastDirtyWatch = watch;
+                lastLoopLastDirtyWatch = null;
+                watch.last = value;
+                var fireTimer;
+                assert((fireTimer = _perf.startTimer('ng.fire', watch.exp)) != false);
+                watch.fn(value, ((last == _initWatchVal) ? value : last), current);
+                assert(_perf.stopTimer(fireTimer) != false);
+              }
+            } catch (e, s) {
+              _exceptionHandler(e, s);
             }
           }
 
@@ -495,7 +496,7 @@ class Scope implements Map {
         assert(_perf.stopTimer(timerId) != false);
         if(lastDirtyWatch != null && (_ttlLeft--) == 0) {
           throw '$_ttl \$digest() iterations reached. Aborting!\n' +
-              'Watchers fired in the last 5 iterations: ${_toJson(watchLog)}';
+              'Watchers fired in the last ${_ttl - 2} iterations: ${_toJson(watchLog)}';
         }
       } while (lastDirtyWatch != null || innerAsyncQueue.length > 0);
       _perf.counters['ng.scope.watchers'] = watcherCount;
@@ -706,17 +707,58 @@ class Scope implements Map {
   }
 }
 
-var _initWatchVal = new Object();
+class _InitWatchVal { const _InitWatchVal(); }
+const _initWatchVal = const _InitWatchVal();
 
 class _Watch {
-  Function fn;
-  dynamic last;
-  Function get;
-  String exp;
+  final Function fn;
+  final Function get;
+  final String exp;
+  var last;
 
-  _Watch(fn, this.last, getFn, this.exp) {
-    this.fn = relaxFnArgs3(fn);
-    this.get = relaxFnArgs1(getFn);
+  _Watch previous;
+  _Watch next;
+
+  _Watch(fn, this.last, getFn, this.exp)
+      : this.fn  = relaxFnArgs3(fn)
+      , this.get = relaxFnArgs1(getFn);
+}
+
+class _WatchList {
+  int length = 0;
+  _Watch head;
+  _Watch tail;
+
+  void addLast(_Watch watch) {
+    assert(watch.previous == null);
+    assert(watch.next == null);
+    if (tail == null) {
+      tail = head = watch;
+    } else {
+      watch.previous = tail;
+      tail.next = watch;
+      tail = watch;
+    }
+    length++;
+  }
+
+  void remove(_Watch watch) {
+    if (watch == head) {
+      _Watch next = watch.next;
+      if (next == null) tail = null;
+      else next.previous = null;
+      head = next;
+    } else if (watch == tail) {
+      _Watch previous = watch.previous;
+      previous.next = null;
+      tail = previous;
+    } else {
+      _Watch next = watch.next;
+      _Watch previous = watch.previous;
+      previous.next = next;
+      next.previous = previous;
+    }
+    length--;
   }
 }
 

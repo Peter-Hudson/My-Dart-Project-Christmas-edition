@@ -14,8 +14,12 @@ class ServerController {
   }
 }
 
+@NgController(
+  selector: '[mymvc-controller]',
+  publishAs: 'mymvc'
+)
+
 class MymvcController {
-  
-  
+
 }
 

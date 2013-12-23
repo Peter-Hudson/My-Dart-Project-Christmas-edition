@@ -17,6 +17,14 @@ class Expression implements ParserAST {
   String exp;
   List parts;
 
+  // Expressions that represent field accesses have a couple of
+  // extra fields. We use that to generate an optimized closure
+  // for calling fields of objects without having to load the
+  // field separately.
+  Expression fieldHolder;
+  String fieldName;
+  bool get isFieldAccess => fieldHolder != null;
+
   Expression(ParsedGetter this.eval, [ParsedSetter this.assign]);
 
   bind(context) => new BoundExpression(context, this);

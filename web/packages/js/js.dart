@@ -70,6 +70,7 @@
 library js;
 
 import 'dart:js' as js;
+@MirrorsUsed(symbols: '*')
 import 'dart:mirrors';
 
 /**
@@ -129,6 +130,19 @@ class Proxy<T extends Proxy> implements Serializable<T> {
   final js.JsObject _jsObject;
 
   Proxy._(this._jsObject);
+
+  /**
+   * Constructs a [Proxy] that proxies a native Dart object; _for expert use
+   * only_.
+   *
+   * Use this constructor only if you wish to get access to JavaScript
+   * properties attached to a browser host object, such as a Node or Blob, that
+   * is normally automatically converted into a native Dart object.
+   *
+   * An exception will be thrown if [object] either is `null` or has the type
+   * `bool`, `num`, or `String`.
+   */
+  Proxy.fromBrowserObject(o) : this._(new js.JsObject.fromBrowserObject(o));
 
   /**
   * Constructs a [Proxy] to a new JavaScript object by invoking a (proxy to a)

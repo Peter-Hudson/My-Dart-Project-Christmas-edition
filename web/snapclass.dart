@@ -65,8 +65,9 @@ snapclass(List args) {
 //         'y':0,
 //         'width': 264,
 //         'height': 253,
-         
-         'clip-path': 'url(${selected_image}c)'
+         'width': '100%',
+         'height': '100%',
+         'mask': 'url(${selected_image}c)'
            
        });
        
@@ -75,19 +76,19 @@ snapclass(List args) {
        temp_ob.callMethod('attr',[imageattr]); 
        temp_ob.callMethod('drag');       
        print(test.runtimeType);
-       print(test['width']);
-       print(test['vb']);
-       print(test['height']);
-       print(test['h']);
-       print(test['x']);
-       print(test['y']);
-       print((test['path']));
+       print(test['points']);
+//       print(test['vb']);
+//       print(test['height']);
+//       print(test['h']);
+//       print(test['x']);
+//       print(test['y']);
+//       print((test['path']));
        
        
        
         
        
-       image_list.add(temp_ob);
+       image_list.add(temp_ob);break;
      }
    }
            
