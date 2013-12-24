@@ -12,10 +12,11 @@ import 'stageclass.dart';
 
 void main(){
   
-  List images = ['https://graph.facebook.com/peterhhudson/picture?width=200&height=200','https://graph.facebook.com/peterhhudson/picture?width=200&height=200'];  
-  
+  List images = ['https://graph.facebook.com/peterhhudson/picture?width=200&height=200','https://graph.facebook.com/peterhhudson/picture?width=200&height=200','https://graph.facebook.com/peterhhudson/picture?width=200&height=200','https://graph.facebook.com/peterhhudson/picture?width=200&height=200'];  
   var st = new Stageclass('https://graph.facebook.com/peterhhudson/picture?width=200&height=200',images);
   
+  
+
   var module = new Module()
   ..type(MymvcController)
   ..type(PlaybackHttpBackendConfig);

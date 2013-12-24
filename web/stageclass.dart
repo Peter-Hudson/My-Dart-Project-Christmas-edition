@@ -31,6 +31,7 @@ class Stageclass{
     renderLoop.addStage(stage);
     
     buildStar();
+    var circleMask = new Mask.circle(100, 100, 100);
     
     resourceManager = new ResourceManager()
     ..addBitmapData('tree', 'christmas-tree.svg')
@@ -48,7 +49,6 @@ class Stageclass{
         stage.addChild(fbprofile);
       });
     
-    var circleMask = new Mask.circle(100, 100, 100);
     for(var cf=0; cf<friends.length;cf++){
       var temp_friend = friends[cf];
       resourceManager
@@ -61,26 +61,42 @@ class Stageclass{
           f1.height = ballballs[cf]['height'];
           f1.x = ballballs[cf]['x'];
           f1.y = ballballs[cf]['y'];
-          f1.mask = circleMask;
+          f1.mask = circleMask;          
+          stage.addChild(f1);          
           
-          stage.addChild(f1);
-          var ff = new GlowFilter(color_list[cf],0.6);
-          var shape = new Shape();
-          shape.graphics.circle(ballballs[cf]['x']+50, ballballs[cf]['y']+50, 50);
-          
-          
-          
-//          shape.graphics.fillStyle(color_list[cf]);
-          
-          
-          
-          stage.addChild(shape);
-          
-//          renderedFriends.add(f1);
-        
         });
     }
     
+    DrawEmBalls(friends);    
+  }
+  
+  DrawEmBalls(List friends){       
+    
+    resourceManager    
+    ..load().then((_) {
+      for(var sf=0; sf<ballballs.length;sf++){
+        var shapeFilter = new GlowFilter(color_list[sf],1.0,20,20);
+        var filterBounds = shapeFilter.getBounds();          
+        
+        var shape = new Shape();
+        shape.graphics.circle(ballballs[sf]['x']+50, ballballs[sf]['y']+50, 50);
+        if(sf < friends.length){
+          shape.alpha = 0.6;
+        }
+        shape.graphics.fillColor(color_list[sf]);
+        
+        filterBounds.inflate(shape.width, shape.height);
+        
+//          shape.filters = [shapeFilter];
+//          shape.applyCache(filterBounds.left, filterBounds.top, filterBounds.width, filterBounds.height);
+        
+        stage.addChild(shape);
+        print(((sf % 2)));
+        if((sf % 2) == 1){
+          stage.removeChild(shape);
+        }
+      }
+    });
     
   }
   
@@ -93,34 +109,7 @@ class Stageclass{
       starPath.add(new Point(102 + 100 * math.cos(a1), 90+100 * math.sin(a1)));
       starPath.add(new Point(102 + 52 * math.cos(a2), 90+52 * math.sin(a2)));
     }
-    
       star = new Mask.custom(starPath);
-//    stage.addChild(customMask);
   }
   
-}
-
-
-class FlowerField extends Sprite {
-
-  FlowerField() {
-
-    this.pivotX = 470;
-    this.pivotY = 250;
-
-    // Add 150 rotating flowers to the field.
-
-//  
-//      var bitmapData = resourceManager.getBitmapData('me');
-//      var bitmap = new Bitmap(bitmapData)
-//        ..pivotX = 64
-//        ..pivotY = 64
-//        ..x = 64 
-//        ..y = 64 ;
-//
-//      addChild(bitmap);
-//
-//      stage.juggler.tween(bitmap, 600, TransitionFunction.linear)
-//        ..animate.rotation.to(math.PI * 60.0);
-   }
 }
